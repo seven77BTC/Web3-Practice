@@ -65,4 +65,32 @@ privateKey => signature
 
 ## *json-rpc-engine* usage method
 
-    
+    - will be revealed later
+
+## *Opensea Operation*
+
+*make offer*
+
+    一般选择 WETH 作为价值标的，也可以自定义 ERC-20 代币作为标的
+    不可以用 ETH 作为价值标的
+    第一次 make offer 之前需要和 opensea 签署一个合约，这一步骤需要花费一定 gas fee
+    后面可以继续挂单，这也需要在钱包上签署一个合约，但是这一步骤不要花费任何 gas fee
+
+*make sell*
+
+    最开始需要签两份合约，这一步骤需要花费 gas fee
+    一般选择 ETH 作为价值标的
+    后面 sell 需要在钱包上签署一个合约，但是这一步骤不需要花费 gas fee
+
+*accept offer*
+
+    直接点击确认即可,需要花费 gas fee
+    如果 offer 提供者在 accept 之前账户中的代币已经不足，则 offer 会自动取消
+
+*accept sell*
+
+    直接点击确认即可,需要花费 gas fee
+
+每笔成交的交易，opensea 会给 owner 收取 2.5% 的手续费。交易发起者需要承担相应的 gas fee.
+
+## 交易流程详解 —— Wyv protocol

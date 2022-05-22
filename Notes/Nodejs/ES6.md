@@ -180,6 +180,8 @@ An async function is a function declared with the async keyword, and the await k
 
 The async and await keywords enable asynchronous, promise-based behavior to be written in a cleaner style,
 
+The async function also means that the function will not affect the processing of other functions.
+
 avoiding the need to explicitly condigure promise chains.
 
     function resolveAfter2Seconds() {
