@@ -94,3 +94,26 @@ privateKey => signature
 每笔成交的交易，opensea 会给 owner 收取 2.5% 的手续费。交易发起者需要承担相应的 gas fee.
 
 ## 交易流程详解 —— Wyv protocol
+
+    - TODO
+
+## Swap
+
+    1 - 通过 ERC-20 合约购买
+    2 - 通过 Uni-Swap 交换
+
+## 一些常用的接口
+
+    const contractInstance = new web3.eth.Contract(
+        contractABI,
+        "0x contract address",
+    );
+
+    contractInstance.methods.yourFunction().call()
+        .catch((err)=>{console.log(err);})
+
+    contractInstance.methods.anotherFunction().
+    send().once().on().on()
+
+    
+ 
