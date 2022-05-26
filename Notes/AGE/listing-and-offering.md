@@ -115,5 +115,4 @@ privateKey => signature
     contractInstance.methods.anotherFunction().
     send().once().on().on()
 
-    
  
