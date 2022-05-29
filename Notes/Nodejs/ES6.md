@@ -211,3 +211,87 @@ Async functions always return a promise. If the return value of an async functio
     function foo() {
         return Promise.resolve(1)
     }
+
+## *node-js* 事件循环
+
+    *nodejs* 代码是单线程的
+    大多数浏览器中，每个浏览器选项卡都有一个事件循环，以使每个进程隔离开，并避免使用无限循环
+    *JS* 中几乎所有的 *I/O* 基元都是非阻塞的。被阻塞时一个异常，所以 *JS* 中有很多回调
+    调用堆栈、消息队列
+
+## 变量
+
+    全局变量
+    局部变量
+    块级作用域 let
+    常量 const
+
+## 关于 *await*
+
+正确写法：
+
+    async function main() { 
+        for ( var i=234; i<244; i++) {
+            const asset = seaport.api.getAsset({
+                tokenAddress: "0xa5Bb28eecC6134F89745E34ec6aB5d5Bcb16dAD7",
+                tokenId: i
+            })
+
+            asset.then((assetJs)=>{
+                console.log(assetJs);
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+    }
+
+或者：
+
+    async function main() { 
+        for ( var i=234; i<244; i++) {
+            const asset = await seaport.api.getAsset({
+                tokenAddress: "0xa5Bb28eecC6134F89745E34ec6aB5d5Bcb16dAD7",
+                tokenId: i
+            })}
+            console.log(asset);
+    }
+
+await 是 JS 中的语法糖，其底层机理和 function().then() 是一致的。
+
+所以在一个 async 函数中两个先后的 await 之间是异步的。并不会：先执行第一个，执行完毕后再执行第二个。而是把两者作为额外的线程分开运行，并放在一个 FIFO 中。
+
+## *nodejs* 中 *js* 文件互相引用
+
+*fun1.js*
+
+    var fun2 = require("./fun2");
+    var fun3 = require("./fun3");
+    function fun1(){
+        console.log("I am fun1.");
+        fun2.add(1, 2);
+        fun3();
+    }
+
+    fun1();
+
+*fun2.js*
+
+    function reduce(a, b) {
+        console.log("I am method reduce in fun2.");
+        console.log(a-b);
+    }
+    function add(a, b) {
+        console.log("I am method add in fun2.");
+        console.log(a+b);
+    }
+    module.exports = {
+        reduce,
+        add
+    }
+
+*fun3.js*
+
+    module.exports = function print() {
+        console.log("I am a method in fun3.");
+    }
+
